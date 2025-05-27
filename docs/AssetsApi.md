@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_asset_by_id**](AssetsApi.md#delete_asset_by_id) | **DELETE** /assets/{asset-id} | Delete an asset
 [**delete_bulk_assets**](AssetsApi.md#delete_bulk_assets) | **DELETE** /assets-bulk | Delete a list of assets
-[**dry_run_delete_bulk_assets**](AssetsApi.md#dry_run_delete_bulk_assets) | **DELETE** /assets-bulk/dry-run | Dry-run for deleting a list of assets
 [**dry_run_post_bulk_assets**](AssetsApi.md#dry_run_post_bulk_assets) | **POST** /assets-bulk/dry-run | Dry-run for creating a list of assets
 [**dry_run_put_bulk_assets**](AssetsApi.md#dry_run_put_bulk_assets) | **PUT** /assets-bulk/dry-run | Dry-run for creating or updating a list of assets
 [**get_asset_by_id**](AssetsApi.md#get_asset_by_id) | **GET** /assets/{asset-id} | Information about an asset
@@ -187,95 +186,6 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | The complete list of assets have been successfully deleted. |  -  |
 **422** | Issues may arise during the deletion process. If at least one asset encounters an error and cannot be deleted or is not found, no changes will be applied to any of the assets in the list. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **dry_run_delete_bulk_assets**
-> List[AssetDryRun] dry_run_delete_bulk_assets(request_body, identify_by=identify_by, expansions=expansions)
-
-Dry-run for deleting a list of assets
-
-Simulates the process of deleting multiple assets via the 'DELETE /assets-bulk' without actually persisting any changes.
-
-### Example
-
-* Api Key Authentication (ApiKeyAuth):
-* Bearer (JWT) Authentication (BearerAuth):
-
-```python
-import eliona.api_client2
-from eliona.api_client2.models.asset_dry_run import AssetDryRun
-from eliona.api_client2.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://name.eliona.io/v2
-# See configuration.py for a list of all supported configuration parameters.
-configuration = eliona.api_client2.Configuration(
-    host = "https://name.eliona.io/v2"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: ApiKeyAuth
-configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
-
-# Configure Bearer authorization (JWT): BearerAuth
-configuration = eliona.api_client2.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with eliona.api_client2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = eliona.api_client2.AssetsApi(api_client)
-    request_body = ['request_body_example'] # List[str] | 
-    identify_by = 'resourceId' # str | Serves the field name send in the request body as a unique identifier for the asset, essential for operations like updates or deletions. Please refer to the Asset schema definition for further information about this fields.  In cases where this parameter isn't defined, all field names are used in the order defined. So if there is no 'resourceId' present in the request body, the 'deviceId' is used and when there is also no deviceId present the 'id' field (assetId) is used.  (optional)
-    expansions = ['expansions_example'] # List[str] | List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows 'ObjectName.fieldName'. (optional)
-
-    try:
-        # Dry-run for deleting a list of assets
-        api_response = api_instance.dry_run_delete_bulk_assets(request_body, identify_by=identify_by, expansions=expansions)
-        print("The response of AssetsApi->dry_run_delete_bulk_assets:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AssetsApi->dry_run_delete_bulk_assets: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **request_body** | [**List[str]**](str.md)|  | 
- **identify_by** | **str**| Serves the field name send in the request body as a unique identifier for the asset, essential for operations like updates or deletions. Please refer to the Asset schema definition for further information about this fields.  In cases where this parameter isn&#39;t defined, all field names are used in the order defined. So if there is no &#39;resourceId&#39; present in the request body, the &#39;deviceId&#39; is used and when there is also no deviceId present the &#39;id&#39; field (assetId) is used.  | [optional] 
- **expansions** | [**List[str]**](str.md)| List of referenced data to load, insert or update. Each entry defines the full qualified name of the field to be expanded as follows &#39;ObjectName.fieldName&#39;. | [optional] 
-
-### Return type
-
-[**List[AssetDryRun]**](AssetDryRun.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The list of expected results if the request is actually performed. The content displays the list of expected results in the same order as the initial request. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

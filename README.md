@@ -153,7 +153,6 @@ Class | Method | HTTP request | Description
 *AssetTypesApi* | [**put_asset_type_by_name**](docs/AssetTypesApi.md#put_asset_type_by_name) | **PUT** /asset-types/{asset-type-name} | Update an asset type
 *AssetsApi* | [**delete_asset_by_id**](docs/AssetsApi.md#delete_asset_by_id) | **DELETE** /assets/{asset-id} | Delete an asset
 *AssetsApi* | [**delete_bulk_assets**](docs/AssetsApi.md#delete_bulk_assets) | **DELETE** /assets-bulk | Delete a list of assets
-*AssetsApi* | [**dry_run_delete_bulk_assets**](docs/AssetsApi.md#dry_run_delete_bulk_assets) | **DELETE** /assets-bulk/dry-run | Dry-run for deleting a list of assets
 *AssetsApi* | [**dry_run_post_bulk_assets**](docs/AssetsApi.md#dry_run_post_bulk_assets) | **POST** /assets-bulk/dry-run | Dry-run for creating a list of assets
 *AssetsApi* | [**dry_run_put_bulk_assets**](docs/AssetsApi.md#dry_run_put_bulk_assets) | **PUT** /assets-bulk/dry-run | Dry-run for creating or updating a list of assets
 *AssetsApi* | [**get_asset_by_id**](docs/AssetsApi.md#get_asset_by_id) | **GET** /assets/{asset-id} | Information about an asset
