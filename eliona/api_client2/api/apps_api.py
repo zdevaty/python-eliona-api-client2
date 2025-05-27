@@ -323,7 +323,7 @@ class AppsApi:
     ) -> Patch:
         """Information about a patch for an app
 
-        Gets information about a patch for an app.
+        Getaas information about a patch for an app.
 
         :param app_name: The name of the app (required)
         :type app_name: str
@@ -394,7 +394,7 @@ class AppsApi:
     ) -> ApiResponse[Patch]:
         """Information about a patch for an app
 
-        Gets information about a patch for an app.
+        Getaas information about a patch for an app.
 
         :param app_name: The name of the app (required)
         :type app_name: str
@@ -465,7 +465,7 @@ class AppsApi:
     ) -> RESTResponseType:
         """Information about a patch for an app
 
-        Gets information about a patch for an app.
+        Getaas information about a patch for an app.
 
         :param app_name: The name of the app (required)
         :type app_name: str

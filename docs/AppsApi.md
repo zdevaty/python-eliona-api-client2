@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 Information about a patch for an app
 
-Gets information about a patch for an app.
+Getaas information about a patch for an app.
 
 ### Example
 
