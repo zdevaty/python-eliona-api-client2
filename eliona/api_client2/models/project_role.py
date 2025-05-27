@@ -18,25 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from eliona.api_client2.models.data_subtype import DataSubtype
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CalculationRule(BaseModel):
+class ProjectRole(BaseModel):
     """
-    Calculation rule to calculate asset attribute data
+    A role that can assigned to users within a project
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The id of the rule")
-    asset_id: StrictInt = Field(description="ID of the corresponding asset", alias="assetId")
-    subtype: DataSubtype
-    attribute: StrictStr = Field(description="Name of the attribute of the asset type to be calculated")
-    virtual: Optional[StrictBool] = Field(default=None, description="Is the calculation attribute virtual or not")
-    formula: Optional[StrictStr] = Field(default=None, description="calculation rule to calculate the value for the attribute")
-    unit: Optional[StrictStr] = Field(default=None, description="Physical unit of calculated data")
-    filter: Optional[Dict[str, Any]] = Field(default=None, description="Filter definition for calculation rule")
-    __properties: ClassVar[List[str]] = ["id", "assetId", "subtype", "attribute", "virtual", "formula", "unit", "filter"]
+    id: Optional[StrictInt] = Field(default=None, description="The internal Id of role")
+    name: StrictStr = Field(description="Display name of the role")
+    __properties: ClassVar[List[str]] = ["id", "name"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -56,7 +49,7 @@ class CalculationRule(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CalculationRule from a JSON string"""
+        """Create an instance of ProjectRole from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -84,31 +77,11 @@ class CalculationRule(BaseModel):
         if self.id is None and "id" in self.model_fields_set:
             _dict['id'] = None
 
-        # set to None if virtual (nullable) is None
-        # and model_fields_set contains the field
-        if self.virtual is None and "virtual" in self.model_fields_set:
-            _dict['virtual'] = None
-
-        # set to None if formula (nullable) is None
-        # and model_fields_set contains the field
-        if self.formula is None and "formula" in self.model_fields_set:
-            _dict['formula'] = None
-
-        # set to None if unit (nullable) is None
-        # and model_fields_set contains the field
-        if self.unit is None and "unit" in self.model_fields_set:
-            _dict['unit'] = None
-
-        # set to None if filter (nullable) is None
-        # and model_fields_set contains the field
-        if self.filter is None and "filter" in self.model_fields_set:
-            _dict['filter'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CalculationRule from a dict"""
+        """Create an instance of ProjectRole from a dict"""
         if obj is None:
             return None
 
@@ -117,13 +90,7 @@ class CalculationRule(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "assetId": obj.get("assetId"),
-            "subtype": obj.get("subtype") if obj.get("subtype") is not None else DataSubtype.NUMBER_SUBTYPE_INPUT,
-            "attribute": obj.get("attribute"),
-            "virtual": obj.get("virtual"),
-            "formula": obj.get("formula"),
-            "unit": obj.get("unit"),
-            "filter": obj.get("filter")
+            "name": obj.get("name")
         })
         return _obj
 

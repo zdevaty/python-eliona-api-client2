@@ -23,15 +23,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Patch(BaseModel):
+class ProjectUser(BaseModel):
     """
-    A patch for an app
+    A project user
     """ # noqa: E501
-    app_name: StrictStr = Field(description="Name of the app", alias="appName")
-    name: StrictStr = Field(description="Name of the patch")
-    active: Optional[StrictBool] = Field(default=None, description="Is the app active or inactive")
-    applied: Optional[StrictBool] = Field(default=None, description="Is the app already applied or not")
-    __properties: ClassVar[List[str]] = ["appName", "name", "active", "applied"]
+    user_name: StrictStr = Field(description="The unique identifier for the user, represented as an email address.", alias="userName")
+    role_name: StrictStr = Field(description="The role assigned to the user within the project (e.g., readonly, admin, contributor).", alias="roleName")
+    enabled: Optional[StrictBool] = Field(default=None, description="Whether the user for this project is currently active (true) or disabled (false).")
+    __properties: ClassVar[List[str]] = ["userName", "roleName", "enabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +50,7 @@ class Patch(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Patch from a JSON string"""
+        """Create an instance of ProjectUser from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,21 +71,16 @@ class Patch(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if active (nullable) is None
+        # set to None if enabled (nullable) is None
         # and model_fields_set contains the field
-        if self.active is None and "active" in self.model_fields_set:
-            _dict['active'] = None
-
-        # set to None if applied (nullable) is None
-        # and model_fields_set contains the field
-        if self.applied is None and "applied" in self.model_fields_set:
-            _dict['applied'] = None
+        if self.enabled is None and "enabled" in self.model_fields_set:
+            _dict['enabled'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Patch from a dict"""
+        """Create an instance of ProjectUser from a dict"""
         if obj is None:
             return None
 
@@ -94,10 +88,9 @@ class Patch(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "appName": obj.get("appName"),
-            "name": obj.get("name"),
-            "active": obj.get("active"),
-            "applied": obj.get("applied")
+            "userName": obj.get("userName"),
+            "roleName": obj.get("roleName"),
+            "enabled": obj.get("enabled")
         })
         return _obj
 

@@ -226,7 +226,7 @@ with eliona.api_client2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = eliona.api_client2.AppsApi(api_client)
     app_name = 'weather' # str | The name of the app
-    registered = True # bool | Marks that the app is now initialized and installed. Further request to get app information returns { \"registered\": true } (optional)
+    registered = True # bool | Mareks that the app is now initialized and installed. Further request to get app information returns { \"registered\": true } (optional)
 
     try:
         # Update an app
@@ -243,7 +243,7 @@ with eliona.api_client2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **app_name** | **str**| The name of the app | 
- **registered** | **bool**| Marks that the app is now initialized and installed. Further request to get app information returns { \&quot;registered\&quot;: true } | [optional] 
+ **registered** | **bool**| Mareks that the app is now initialized and installed. Further request to get app information returns { \&quot;registered\&quot;: true } | [optional] 
 
 ### Return type
 
